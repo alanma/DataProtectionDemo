@@ -27,9 +27,9 @@ NSString *const keychainAccountWhenUnlocked = @"demo-whenunlocked";
               accessibility:kSecAttrAccessibleWhenUnlocked];
 }
 
+
 - (NSArray *)retrieveKeychainData {
     NSMutableArray *result = [NSMutableArray array];
-    
     [result addObject:[self retrieveKeychainItem:keychainAccountAlways]];
     [result addObject:[self retrieveKeychainItem:keychainAccountAfterFirstUnlock]];
     [result addObject:[self retrieveKeychainItem:keychainAccountWhenUnlocked]];
@@ -38,21 +38,13 @@ NSString *const keychainAccountWhenUnlocked = @"demo-whenunlocked";
 
 
 - (void)storeKeychainItem:(NSData *)data account:(NSString *)account accessibility:(CFTypeRef)accessibility {
-
-    NSMutableDictionary *item = [NSMutableDictionary dictionary];
-    
     // Note that metadata, like the account name, is not encrypted.
-    [item setObject:account
-             forKey:(__bridge id)kSecAttrAccount];
-    
-    [item setObject:(__bridge id)kSecClassGenericPassword
-             forKey:(__bridge id)kSecClass];
-    
-    [item setObject:(__bridge id)accessibility
-             forKey:(__bridge id)kSecAttrAccessible];
-    
-    [item setObject:data
-             forKey:(__bridge id)kSecValueData];
+    NSDictionary *item = @{
+                           (__bridge id)kSecAttrAccount: account,
+                           (__bridge id)kSecClass: (__bridge id)kSecClassGenericPassword,
+                           (__bridge id)kSecAttrAccessible: (__bridge id)accessibility,
+                           (__bridge id)kSecValueData: data,
+                          };
     
     OSStatus error = SecItemAdd((__bridge CFDictionaryRef)item, NULL);
     if(error) {
@@ -62,17 +54,14 @@ NSString *const keychainAccountWhenUnlocked = @"demo-whenunlocked";
     }
 }
 
-- (NSData *)retrieveKeychainItem:(NSString *)account {
-    NSMutableDictionary *query = [NSMutableDictionary dictionary];
-    
-    [query setObject:account
-              forKey:(__bridge id)kSecAttrAccount];
-    
-    [query setObject:(__bridge id)kSecClassGenericPassword
-              forKey:(__bridge id)kSecClass];
 
-    [query setObject:(__bridge id)kCFBooleanTrue
-              forKey:(__bridge id)kSecReturnData];
+- (NSData *)retrieveKeychainItem:(NSString *)account {
+    NSDictionary *query = @{
+                            (__bridge id)kSecAttrAccount: account,
+                            (__bridge id)kSecClass: (__bridge id)kSecClassGenericPassword,
+                            (__bridge id)kSecReturnData: (__bridge id)kCFBooleanTrue,
+                          };
+    
 
     CFDataRef result = NULL;
     OSStatus error = SecItemCopyMatching((__bridge CFDictionaryRef)query, (CFTypeRef *)&result);
