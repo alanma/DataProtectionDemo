@@ -23,6 +23,7 @@
 		0391A7DB17EB093000FDACC8 /* DataProtectionDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0391A7DA17EB093000FDACC8 /* DataProtectionDemoTests.m */; };
 		0391A7E717EB0DE500FDACC8 /* DPDKeychainStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 0391A7E617EB0DE500FDACC8 /* DPDKeychainStorage.m */; };
 		0391A7E917EB153400FDACC8 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0391A7E817EB153400FDACC8 /* Security.framework */; };
+		0391A7EE17EB291B00FDACC8 /* DPDRawNSDataStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 0391A7ED17EB291B00FDACC8 /* DPDRawNSDataStorage.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,6 +60,8 @@
 		0391A7E517EB0DE500FDACC8 /* DPDKeychainStorage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DPDKeychainStorage.h; sourceTree = "<group>"; };
 		0391A7E617EB0DE500FDACC8 /* DPDKeychainStorage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DPDKeychainStorage.m; sourceTree = "<group>"; };
 		0391A7E817EB153400FDACC8 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		0391A7EC17EB291B00FDACC8 /* DPDRawNSDataStorage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DPDRawNSDataStorage.h; sourceTree = "<group>"; };
+		0391A7ED17EB291B00FDACC8 /* DPDRawNSDataStorage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DPDRawNSDataStorage.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -130,6 +133,8 @@
 				0391A7B617EB092F00FDACC8 /* Supporting Files */,
 				0391A7E517EB0DE500FDACC8 /* DPDKeychainStorage.h */,
 				0391A7E617EB0DE500FDACC8 /* DPDKeychainStorage.m */,
+				0391A7EC17EB291B00FDACC8 /* DPDRawNSDataStorage.h */,
+				0391A7ED17EB291B00FDACC8 /* DPDRawNSDataStorage.m */,
 			);
 			path = DataProtectionDemo;
 			sourceTree = "<group>";
@@ -281,6 +286,7 @@
 				0391A7E717EB0DE500FDACC8 /* DPDKeychainStorage.m in Sources */,
 				0391A7BC17EB092F00FDACC8 /* main.m in Sources */,
 				0391A7C617EB092F00FDACC8 /* DPDViewController.m in Sources */,
+				0391A7EE17EB291B00FDACC8 /* DPDRawNSDataStorage.m in Sources */,
 				0391A7C017EB092F00FDACC8 /* DPDAppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
