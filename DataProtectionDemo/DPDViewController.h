@@ -10,4 +10,10 @@
 
 @interface DPDViewController : UIViewController
 
+@property (weak, nonatomic) IBOutlet UITextField *secretField;
+
+- (IBAction)keychainAdd:(id)sender;
+- (IBAction)keychainRetrieve:(id)sender;
+- (IBAction)keychainRetrieveDelayed:(id)sender;
+
 @end
