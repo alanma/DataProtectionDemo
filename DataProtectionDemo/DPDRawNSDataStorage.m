@@ -12,31 +12,32 @@ NSString *const dataFilenameNone = @"demo-nsdata-none.txt";
 NSString *const dataFilenameFirstAuthentication = @"demo-nsdata-firstauthentication.txt";
 NSString *const dataFilenameComplete = @"demo-nsdata-complete.txt";
 
+
 @implementation DPDRawNSDataStorage
 
-- (void)storeNSData:(NSData *)data {
-    [self saveNSData:data
+- (void)storeAllNSData:(NSData *)data {
+    [self saveNSDataItem:data
             filename:dataFilenameNone
        accessibility:NSDataWritingFileProtectionNone];
-    [self saveNSData:data
+    [self saveNSDataItem:data
             filename:dataFilenameFirstAuthentication
        accessibility:NSDataWritingFileProtectionCompleteUntilFirstUserAuthentication];
-    [self saveNSData:data
+    [self saveNSDataItem:data
             filename:dataFilenameComplete
        accessibility:NSDataWritingFileProtectionComplete];
 }
 
 
-- (NSArray *)retrieveNSData {
+- (NSArray *)retrieveAllNSData {
     NSMutableArray *result = [NSMutableArray array];
-    [result addObject:[self loadNSData:dataFilenameNone]];
-    [result addObject:[self loadNSData:dataFilenameFirstAuthentication]];
-    [result addObject:[self loadNSData:dataFilenameComplete]];
+    [result addObject:[self loadNSDataItem:dataFilenameNone]];
+    [result addObject:[self loadNSDataItem:dataFilenameFirstAuthentication]];
+    [result addObject:[self loadNSDataItem:dataFilenameComplete]];
     return result;
 }
 
 
-- (void)saveNSData:(NSData *)data filename:(NSString *)filename accessibility:(NSDataWritingOptions)accessibility {
+- (void)saveNSDataItem:(NSData *)data filename:(NSString *)filename accessibility:(NSDataWritingOptions)accessibility {
     NSError *error;
     NSString *filepath = [self pathForFilename:filename];
     
@@ -47,7 +48,8 @@ NSString *const dataFilenameComplete = @"demo-nsdata-complete.txt";
     }
 }
 
-- (NSData *)loadNSData:(NSString *)filename {
+
+- (NSData *)loadNSDataItem:(NSString *)filename {
     NSError *error;
     NSData *result = [NSData dataWithContentsOfFile:[self pathForFilename:filename] options:0 error:&error];
     if (!result) {
@@ -56,6 +58,7 @@ NSString *const dataFilenameComplete = @"demo-nsdata-complete.txt";
     }
     return result;
 }
+
 
 - (NSString *)pathForFilename:(NSString *)filename {
     NSString *docsDir;

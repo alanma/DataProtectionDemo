@@ -13,9 +13,10 @@ NSString *const keychainAccountAlways = @"demo-always";
 NSString *const keychainAccountAfterFirstUnlock = @"demo-afterfirstunlock";
 NSString *const keychainAccountWhenUnlocked = @"demo-whenunlocked";
 
+
 @implementation DPDKeychainStorage
 
-- (void)storeKeychainData:(NSData *)data {
+- (void)storeAllKeychainData:(NSData *)data {
     [self storeKeychainItem:data
                     account:keychainAccountAlways
               accessibility:kSecAttrAccessibleAlways];
@@ -28,7 +29,7 @@ NSString *const keychainAccountWhenUnlocked = @"demo-whenunlocked";
 }
 
 
-- (NSArray *)retrieveKeychainData {
+- (NSArray *)retrieveAllKeychainData {
     NSMutableArray *result = [NSMutableArray array];
     [result addObject:[self retrieveKeychainItem:keychainAccountAlways]];
     [result addObject:[self retrieveKeychainItem:keychainAccountAfterFirstUnlock]];
@@ -40,11 +41,11 @@ NSString *const keychainAccountWhenUnlocked = @"demo-whenunlocked";
 - (void)storeKeychainItem:(NSData *)data account:(NSString *)account accessibility:(CFTypeRef)accessibility {
     // Note that metadata, like the account name, is not encrypted.
     NSDictionary *item = @{
-                           (__bridge id)kSecAttrAccount: account,
-                           (__bridge id)kSecClass: (__bridge id)kSecClassGenericPassword,
-                           (__bridge id)kSecAttrAccessible: (__bridge id)accessibility,
-                           (__bridge id)kSecValueData: data,
-                          };
+        (__bridge id)kSecAttrAccount: account,
+        (__bridge id)kSecClass: (__bridge id)kSecClassGenericPassword,
+        (__bridge id)kSecAttrAccessible: (__bridge id)accessibility,
+        (__bridge id)kSecValueData: data,
+    };
     
     OSStatus error = SecItemAdd((__bridge CFDictionaryRef)item, NULL);
     if(error) {

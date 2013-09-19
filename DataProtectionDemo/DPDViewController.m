@@ -24,62 +24,63 @@
     self.rawNSDataStorage = [DPDRawNSDataStorage new];
 }
 
+
 #pragma mark - Keychain
 
 - (IBAction)keychainAdd:(id)sender {
-    [self.keychainStorage storeKeychainData:self.secretData];
+    [self.keychainStorage storeAllKeychainData:self.secretData];
 }
 
 - (IBAction)keychainRetrieve:(id)sender {
-    NSArray *keychainData = [self.keychainStorage retrieveKeychainData];
+    NSArray *keychainData = [self.keychainStorage retrieveAllKeychainData];
     NSArray *keychainStrings = [self dataArrayToStringArray:keychainData];
     NSLog(@"Received Keychain data: %@", keychainStrings);
 }
 
 - (IBAction)keychainRetrieveDelayed:(id)sender {
     NSLog(@"Scheduling background Keychain retrieve in 12 seconds");
-    UIApplication *application = [UIApplication sharedApplication];
-    UIBackgroundTaskIdentifier bgTask = [application beginBackgroundTaskWithExpirationHandler:^{
-        // Clean up any unfinished task business by marking where you
-        // stopped or ending the task outright.
-        [application endBackgroundTask:bgTask];
-    }];
-    
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 12 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+    [self scheduleBackground:^{
         [self keychainRetrieve:sender];
-        [application endBackgroundTask:bgTask];
-    });
+    }];
 }
+
 
 #pragma mark - NSData
 
 - (IBAction)saveNSData:(id)sender {
-    [self.rawNSDataStorage storeNSData:self.secretData];
+    [self.rawNSDataStorage storeAllNSData:self.secretData];
 }
 
 - (IBAction)retrieveNSData:(id)sender {
-    NSArray *keychainData = [self.rawNSDataStorage retrieveNSData];
+    NSArray *keychainData = [self.rawNSDataStorage retrieveAllNSData];
     NSArray *keychainStrings = [self dataArrayToStringArray:keychainData];
     NSLog(@"Received raw NSData data: %@", keychainStrings);
 }
 
 - (IBAction)retrieveNSDataDelayed:(id)sender {
     NSLog(@"Scheduling background NSData retrieve in 12 seconds");
-    UIApplication *application = [UIApplication sharedApplication];
-    UIBackgroundTaskIdentifier bgTask = [application beginBackgroundTaskWithExpirationHandler:^{
-        // Clean up any unfinished task business by marking where you
-        // stopped or ending the task outright.
-        [application endBackgroundTask:bgTask];
-    }];
-    
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 12 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+    [self scheduleBackground:^{
         [self retrieveNSData:sender];
-        [application endBackgroundTask:bgTask];
-    });
+    }];
 }
+
 
 #pragma mark - Utility functions
 
+- (void)scheduleBackground:(dispatch_block_t)block {
+    UIApplication *application = [UIApplication sharedApplication];
+    __block UIBackgroundTaskIdentifier bgTask = UIBackgroundTaskInvalid;
+    bgTask = [application beginBackgroundTaskWithExpirationHandler:^{
+        [application endBackgroundTask:bgTask];
+        bgTask = UIBackgroundTaskInvalid;
+    }];
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 12 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+        block();
+        [application endBackgroundTask:bgTask];
+        bgTask = UIBackgroundTaskInvalid;
+    });
+}
 
 - (NSData *)secretData {
     return [self.secretField.text dataUsingEncoding:NSUTF8StringEncoding];
@@ -94,6 +95,8 @@
     return result;
 }
 
+
+#pragma mark - UITextFieldDelegate
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     [textField resignFirstResponder];

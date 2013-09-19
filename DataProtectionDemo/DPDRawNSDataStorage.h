@@ -10,7 +10,7 @@
 
 @interface DPDRawNSDataStorage : NSObject
 
-- (void)storeNSData:(NSData *)data;
-- (NSArray *)retrieveNSData;
+- (void)storeAllNSData:(NSData *)data;
+- (NSArray *)retrieveAllNSData;
 
 @end

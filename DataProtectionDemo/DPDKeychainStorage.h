@@ -11,7 +11,7 @@
 
 @interface DPDKeychainStorage : NSObject
 
-- (void)storeKeychainData:(NSData *)data;
-- (NSArray *)retrieveKeychainData;
+- (void)storeAllKeychainData:(NSData *)data;
+- (NSArray *)retrieveAllKeychainData;
 
 @end
