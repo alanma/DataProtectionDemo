@@ -1,11 +1,3 @@
-//
-//  DPDViewController.m
-//  DataProtectionDemo
-//
-//  Created by Erik Romijn on 9/19/13.
-//  Copyright (c) 2013 Solid Links. All rights reserved.
-//
-
 #import "DPDViewController.h"
 #import "DPDKeychainStorage.h"
 #import "DPDRawNSDataStorage.h"
