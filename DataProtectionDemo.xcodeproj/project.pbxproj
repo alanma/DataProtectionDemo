@@ -508,6 +508,7 @@
 				0391A7E017EB093000FDACC8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		0391A7E117EB093000FDACC8 /* Build configuration list for PBXNativeTarget "DataProtectionDemoTests" */ = {
 			isa = XCConfigurationList;
@@ -516,6 +517,7 @@
 				0391A7E317EB093000FDACC8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

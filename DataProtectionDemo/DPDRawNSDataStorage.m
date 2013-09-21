@@ -8,6 +8,7 @@
 
 #import "DPDRawNSDataStorage.h"
 
+NSString *const dataFilenameDefault = @"demo-nsdata-default.txt";
 NSString *const dataFilenameNone = @"demo-nsdata-none.txt";
 NSString *const dataFilenameFirstAuthentication = @"demo-nsdata-firstauthentication.txt";
 NSString *const dataFilenameComplete = @"demo-nsdata-complete.txt";
@@ -17,19 +18,23 @@ NSString *const dataFilenameComplete = @"demo-nsdata-complete.txt";
 
 - (void)storeAllNSData:(NSData *)data {
     [self saveNSDataItem:data
-            filename:dataFilenameNone
-       accessibility:NSDataWritingFileProtectionNone];
+                filename:dataFilenameDefault
+           accessibility:0];
     [self saveNSDataItem:data
-            filename:dataFilenameFirstAuthentication
-       accessibility:NSDataWritingFileProtectionCompleteUntilFirstUserAuthentication];
+                filename:dataFilenameNone
+           accessibility:NSDataWritingFileProtectionNone];
     [self saveNSDataItem:data
-            filename:dataFilenameComplete
-       accessibility:NSDataWritingFileProtectionComplete];
+                filename:dataFilenameFirstAuthentication
+           accessibility:NSDataWritingFileProtectionCompleteUntilFirstUserAuthentication];
+    [self saveNSDataItem:data
+                filename:dataFilenameComplete
+           accessibility:NSDataWritingFileProtectionComplete];
 }
 
 
 - (NSArray *)retrieveAllNSData {
     NSMutableArray *result = [NSMutableArray array];
+    [result addObject:[self loadNSDataItem:dataFilenameDefault]];
     [result addObject:[self loadNSDataItem:dataFilenameNone]];
     [result addObject:[self loadNSDataItem:dataFilenameFirstAuthentication]];
     [result addObject:[self loadNSDataItem:dataFilenameComplete]];
