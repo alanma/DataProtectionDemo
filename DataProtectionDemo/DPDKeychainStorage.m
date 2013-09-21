@@ -65,10 +65,10 @@ NSString *const keychainAccountWhenUnlocked = @"demo-whenunlocked";
 
 - (NSData *)retrieveKeychainItem:(NSString *)account {
     NSDictionary *query = @{
-                            (__bridge id)kSecAttrAccount: account,
-                            (__bridge id)kSecClass: (__bridge id)kSecClassGenericPassword,
-                            (__bridge id)kSecReturnData: (__bridge id)kCFBooleanTrue,
-                          };
+        (__bridge id)kSecAttrAccount: account,
+        (__bridge id)kSecClass: (__bridge id)kSecClassGenericPassword,
+        (__bridge id)kSecReturnData: (__bridge id)kCFBooleanTrue,
+    };
     
 
     CFDataRef result = NULL;
