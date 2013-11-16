@@ -56,7 +56,6 @@
 		0391A7D617EB093000FDACC8 /* DataProtectionDemoTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "DataProtectionDemoTests-Info.plist"; sourceTree = "<group>"; };
 		0391A7D817EB093000FDACC8 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		0391A7DA17EB093000FDACC8 /* DataProtectionDemoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DataProtectionDemoTests.m; sourceTree = "<group>"; };
-		0391A7E417EB0A6600FDACC8 /* DataProtectionDemo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = DataProtectionDemo.entitlements; sourceTree = "<group>"; };
 		0391A7E517EB0DE500FDACC8 /* DPDKeychainStorage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DPDKeychainStorage.h; sourceTree = "<group>"; };
 		0391A7E617EB0DE500FDACC8 /* DPDKeychainStorage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DPDKeychainStorage.m; sourceTree = "<group>"; };
 		0391A7E817EB153400FDACC8 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
@@ -123,7 +122,6 @@
 		0391A7B517EB092F00FDACC8 /* DataProtectionDemo */ = {
 			isa = PBXGroup;
 			children = (
-				0391A7E417EB0A6600FDACC8 /* DataProtectionDemo.entitlements */,
 				0391A7BE17EB092F00FDACC8 /* DPDAppDelegate.h */,
 				0391A7BF17EB092F00FDACC8 /* DPDAppDelegate.m */,
 				0391A7C117EB092F00FDACC8 /* Main.storyboard */,

@@ -37,9 +37,11 @@ NSString *const dataFilenameComplete = @"demo-nsdata-complete.txt";
 - (void)saveNSDataItem:(NSData *)data filename:(NSString *)filename accessibility:(NSDataWritingOptions)accessibility {
     NSError *error;
     NSString *filepath = [self pathForFilename:filename];
+    NSFileManager *fileManager = [NSFileManager defaultManager];
     
     if([data writeToFile:filepath options:accessibility error:&error]) {
-        NSLog(@"Wrote NSData to %@", filename);
+        NSDictionary *newAttributes = [fileManager attributesOfItemAtPath:filepath error:nil];
+        NSLog(@"Wrote NSData to %@ with %@", filename, newAttributes[@"NSFileProtectionKey"]);
     } else {
         NSLog(@"Failed to write NSData to %@", filename);
     }
